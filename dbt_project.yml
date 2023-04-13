@@ -3,7 +3,6 @@ config-version: 2
 version: '0.1'
 
 profile: 'CDR'
-model-paths: ['models']
 
 models:
   CDR:
