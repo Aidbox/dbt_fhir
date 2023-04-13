@@ -1,0 +1,12 @@
+name: 'CDR'
+config-version: 2
+version: '0.1'
+
+profile: 'CDR'
+model-paths: ['models']
+
+models:
+  CDR:
+    FHIR:
+      +enabled: true
+      +materialized: view

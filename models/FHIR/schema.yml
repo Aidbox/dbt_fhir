@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: Patient
+    description: FHIR Patient
+    columns:
+      - name: id
+        description: Patient.id
+      - name: gender
+        description: Patient gender
+      - name: birhDate
+        description: Patient birhDate
+
+metrics:
+  - name: gender_patient
+    model: ref('Patient')
+    label: Patients by gender
+    calculation_method: count
+    expression: id
+    timestamp: birthDate
+    time_grains: [day, week, month, quarter, year, all_time]
+    dimensions:
+      - gender
