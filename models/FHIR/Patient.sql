@@ -4,8 +4,4 @@
         , {{ alive("resource") }} as alive
         , {{ race("resource" )}} as race
         , {{ ethnicity("resource" )}} as ethnicity
-        , resource->'deceased' as deceased
    from patient as p
-where  {{ death("resource")}}
-
-
