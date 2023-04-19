@@ -3,5 +3,6 @@
         , {{ age("resource") }}  as age    
         , {{ alive("resource") }} as alive
         , {{ race("resource" )}} as race
-        , {{ ethnicity("resource" )}} as ethnicity
+        , {{ ethnicity("resource" )}} as ethnicity     
    from patient as p
+   where {{ has_encounter("p.id") }}
