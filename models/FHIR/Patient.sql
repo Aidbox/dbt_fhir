@@ -1,8 +1,10 @@
- select id id 
-        , {{ gender("resource") }}  as gender 
-        , {{ age("resource") }}  as age    
-        , {{ alive("resource") }} as alive
-        , {{ race("resource" )}} as race
-        , {{ ethnicity("resource" )}} as ethnicity     
+ select p.id id 
+        , {{ gender("p.resource") }}  as gender 
+        , {{ age("p.resource") }}  as age    
+        , {{ alive("p.resource") }} as alive
+        , {{ race("p.resource" )}} as race
+        , {{ ethnicity("p.resource" )}} as ethnicity     
    from patient as p
-   where {{ has_encounter("p.id") }}
+   where {{ has_encounter("p.id", 
+                          class=['AMB', 'EMER', 'AMI'], classSystem='snomed', classDisplay='foo',
+                          reason='74400008', reasonDisplay='Appendicitis') }}
