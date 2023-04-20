@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Install dbt
-        run: pip install dbt-core
+        run: pip install dbt-core dbt-postgres
       - name: Build docs
         run: dbt docs generate
 
