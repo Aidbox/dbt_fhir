@@ -29,9 +29,17 @@ __Patient Demographics__
   - `ethnicity`
 
 __Visit__
+`has_encounter`
+- Class
+  `class=None, classSystem=None, classDisplay=None`
 - Reason for Visit
-- Admission and Discharge Dates
+  `reason=None, reasonSystem=None, reasonDisplay=None`
 - Discharge Disposition
+  `discharge=None, dischargeSystem=None, dischargeDisplay=None`
+- Admission Date
+  `adminssionDate=None, admissionLookBack=None`
+- Discharge Date
+  `dischargeDate=None, dischargeLookBack=None`
 
 __Diagnosis__
 - Diagnosis Code

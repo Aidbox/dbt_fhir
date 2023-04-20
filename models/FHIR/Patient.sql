@@ -7,4 +7,9 @@
    from patient as p
    where {{ has_encounter("p.id", 
                           class=['AMB', 'EMER', 'AMI'], classSystem='snomed', classDisplay='foo',
-                          reason='74400008', reasonDisplay='Appendicitis') }}
+                          reason='74400008', reasonDisplay='Appendicitis',
+                          admissionDate='2020-01-01',
+                          dischargeDate='2020-01-01',
+                          admissionLookBack='2 year',
+                          dischargeLookBack='2 year'
+                          ) }}
