@@ -26,8 +26,10 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: Install dbt
         run: pip install dbt-core
+      - name: Build docs
+        run: dbt docs generate
 
    # Deployment job
   deploy:
