@@ -6,3 +6,4 @@ target
 cube/.cubestore
 cube/.env
 .env
+macros/utils/Preview
