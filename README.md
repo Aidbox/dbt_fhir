@@ -1,16 +1,18 @@
-# Aidbox FHIR analytics DBT project
+# Aidbox FHIR DBT Package
 
+## Docs
+...
 
+## Dashboard
+...
 
-
-## TODO:
+## Quik Start
 - Install Aidbox
 - Load Synthea data
 - Install DBT
 - Configure connection
 - Run dbt
 - BI TBD: Superset/PowerBI 
-
 
 ## Macros
 
