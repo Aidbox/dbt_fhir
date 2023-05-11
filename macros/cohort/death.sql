@@ -1,4 +1,4 @@
-{% macro death(resource) -%}
+{% macro death(resource=None) -%}
 {%- if resource %}
     (COALESCE((({{resource}}#>>'{deceased, dateTime}')::timestamp < NOW()),
               (({{resource}}#>>'{deceased, boolean}')::boolean),
