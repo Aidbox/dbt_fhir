@@ -1,18 +1,32 @@
 # Aidbox FHIR DBT Package
 
-## Docs
-...
+# Features
+- FHIR centric
+  - utils
+  - cohorts
+  - tests
+  ...
+- Parallel optimized
+- DB tune configuration
+
+## Generic dbt project instructions
+package info
+install package
+
+## Quick start
+- Run aidbox ...
+- Load synthea data ...
+- Sample project ...
+- Connect to aidbox database
+
+## Analytics framework ...
+- Flat dimentional model ...
+- Build CUBE`s data marts ...
+- Use cube data mart on BI ...
+
 
 ## Dashboard
 ...
-
-## Quik Start
-- Install Aidbox
-- Load Synthea data
-- Install DBT
-- Configure connection
-- Run dbt
-- BI TBD: Superset/PowerBI 
 
 ## Macros
 

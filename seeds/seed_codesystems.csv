@@ -1,2 +1,4 @@
 alias,system
 organization-type,http://terminology.hl7.org/CodeSystem/organization-type
+SNOMED CT-INT,http://snomed.info/sct
+ActCode,http://terminology.hl7.org/CodeSystem/v3-ActCode

@@ -1,2 +1,0 @@
-select resource
-from practitioner
