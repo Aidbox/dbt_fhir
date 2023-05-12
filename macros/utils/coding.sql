@@ -6,4 +6,16 @@
         {{- " && " if ((code or system) and display) -}}
         {{- jsonpath_equal_fn('display', display) -}} 
         )')
-{%- endmacro %}}}:where
+{%- endmacro %}}}
+
+{%- macro coding_code(alias, path, resource=None) -%}
+     (SELECT trim('"' FROM (jsonb_path_query_first({{ resource if resource else "resource" }}, concat('$.{{path}}.coding ?(@.system=="', system, '").code')::jsonpath)::text))
+       FROM {{ ref('seed_codesystems') }} 
+      WHERE alias = '{{alias}}') 
+{%- endmacro -%}
+
+{%- macro coding_display(alias, path, resource=None) -%}
+     (SELECT trim('"' FROM (jsonb_path_query_first({{ resource if resource else "resource" }}, concat('$.{{path}}.coding ?(@.system=="', system, '").display')::jsonpath)::text))
+       FROM {{ ref('seed_codesystems') }} 
+      WHERE alias = '{{alias}}') 
+{%- endmacro -%}
