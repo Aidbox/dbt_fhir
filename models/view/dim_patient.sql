@@ -15,5 +15,3 @@
          , {{ codesystem_code('communication.language', 'language') }} language_code
          , {{ codesystem_display('communication.language', 'language') }} language_display
     FROM {{ ref('Patient') }}
-
--- TODO: Full human name

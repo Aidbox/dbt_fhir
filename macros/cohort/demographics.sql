@@ -1,6 +1,10 @@
 {%- macro age(resource=None) -%}
     DATE_PART('year', AGE(date({{ if_res(resource) }} #>>'{birthDate}')))
-{%- endmacro -%}
+{%- endmacro %}
+
+{%- macro gender(resource=None) -%}
+    ({{ if_res(resource) }} #>>'{gender}' )
+{%- endmacro %}
 
 {%- macro alive(resource=None) -%}
     (COALESCE((({{ if_res(resource) }}#>>'{deceased, dateTime}')::timestamp > NOW()),
@@ -8,20 +12,18 @@
               true))
 {%- endmacro -%}
 
+{%- macro race(resource=None) -%}
+    {{ extension('us-race', 'extension.valueString', resource) }}
+{%- endmacro -%}
+
+{%- macro ethnicity(resource=None) -%}
+    {{ extension('us-ethnicity', 'extension.valueString', resource) }}
+{%- endmacro %}
+
 {%- macro death(resource=None) -%}
     (COALESCE((({{ if_res(resource) }}#>>'{deceased, dateTime}')::timestamp < NOW()),
               (({{ if_res(resource) }}#>>'{deceased, boolean}')::boolean),
               false))
 {%- endmacro -%}
 
-{%- macro ethnicity(resource=None) -%cs}
-    {{ extension('us-ethnicity', 'extension.valueString', resource) }}
-{%- endmacro %}
 
-{%- macro gender(resource=None) -%}
-    ({{ if_res(resource) }} #>>'{gender}' )
-{%- endmacro -%}
-
-{%- macro race(resource=None) -%}
-    {{ extension('us-race', 'extension.valueString', resource) }}
-{%- endmacro -%}
