@@ -7,6 +7,7 @@
          , {{ ref('fact_encounter') }}.type_display type_display
          , date_trunc('month', date ({{ ref('fact_encounter') }}.start)) date
          , avg({{ ref('fact_encounter') }}.duration) duration
+         , round(extract(epoch from (avg({{ ref('fact_encounter') }}.duration)))/60) duration_minutes
          , count(*)
     FROM {{ ref('fact_encounter') }}
     JOIN {{ ref('dim_organization') }} on {{ ref('fact_encounter') }}.organization_synthea_id = {{ ref('dim_organization') }}.synthea_id

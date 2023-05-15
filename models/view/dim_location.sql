@@ -1,8 +1,9 @@
-select    {{ get('name') }}  name
-        , {{ get('status') }}  status
-        , {{ idf('synthea') }} synthea_id
-        , {{ get('address,city') }} city
-        , {{ get('address,state') }}  state
-        , {{ get('address,country') }}  country
-        , {{ idf('synthea', "resource->'managingOrganization'") }} organization_synthea_id
-from {{ ref('Location') }}
+SELECT id
+       , {{ get('name') }}  name
+       , {{ identifier('synthea', "resource->'managingOrganization'") }} organization_synthea_id
+       , {{ identifier('synthea') }} synthea_id
+       , {{ get('status') }}  status
+       , {{ get('address,city') }} city
+       , {{ get('address,state') }}  state
+       , {{ get('address,country') }}  country
+  FROM {{ ref('Location') }}

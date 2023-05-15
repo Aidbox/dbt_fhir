@@ -1,3 +1,3 @@
 {%- macro get(path,resource=None ) -%}
-    (resource#>>'{ {{path}} }')
+    ({{if_res(resource)}}#>>'{ {{path}} }')
 {%- endmacro -%}

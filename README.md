@@ -4,10 +4,18 @@
 - FHIR centric
   - utils
   - cohorts
-  - tests
+  - fhir datatypes tests
+  - incremental ??? ....
   ...
 - Parallel optimized
 - DB tune configuration
+
+
+## Framework
+- Flat your data - star model
+  - List facts and dimentions
+- Create pre aggregated views (cubes)
+- Use BI
 
 ## Generic dbt project instructions
 package info
