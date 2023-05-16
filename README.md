@@ -6,7 +6,8 @@
   - cohorts
   - fhir datatypes tests
   - incremental ??? ....
-  - SQL on fhir
+  - SQL on fhir ??
+  - unnesting ?
 - Parallel optimized
 - DB tune configuration
 
