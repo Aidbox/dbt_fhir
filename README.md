@@ -13,6 +13,12 @@
 
 
 ## Framework
+3 layers
+- RAW fhir date
+ (here is dbt project with fhir helpers)
+- Flat usable views (dimensional/star model)
+- Aggregate your date (OLAP cube)
+
 - Flat your data - star model
   - List facts and dimentions
 - Create pre aggregated views (cubes)

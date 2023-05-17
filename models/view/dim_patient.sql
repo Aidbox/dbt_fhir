@@ -1,8 +1,7 @@
- {{ 
-  config(materialized='table',
-         indexes=[{'columns': ['birthdate', 'birth_year', 'deceased', 'deceased_year']},
-                  {'columns': ['birth_year', 'deceased_year']},
-                  {'columns': ['state', 'gender', 'race', 'birthdate']} ])
+ {{ config(materialized='table',
+                indexes=[{'columns': ['birthdate', 'birth_year', 'deceased', 'deceased_year']},
+                         {'columns': ['birth_year', 'deceased_year']},
+                         {'columns': ['state', 'gender', 'race', 'birthdate', 'ms_display', 'language_display']} ])
   }}
   
   SELECT id
