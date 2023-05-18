@@ -1,3 +1,5 @@
+{# age if deceased ? #}
+
 {%- macro age(resource=None) -%}
     DATE_PART('year', AGE(date({{ if_res(resource) }} #>>'{birthDate}')))
 {%- endmacro %}
