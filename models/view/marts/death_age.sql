@@ -1,4 +1,4 @@
-  SELECT extract('year' from age(deceased, birthdate)) death_age
+  SELECT extract('year' FROM age(deceased, birthdate)) death_age
          , count(id) count
     FROM {{ ref('dim_patient') }}
    WHERE NOT alive

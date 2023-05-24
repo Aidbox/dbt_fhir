@@ -5,7 +5,7 @@
          , p.language_display
          , p.ms_display
          , count(p.id) filter (where p.birth_year    = extract('YEAR' from op.year_date)) as birth
-         , count(p.id) filter (where p.deceased_year = extract('YEAR' from op.year_date))  as deceased 
+         , count(p.id) filter (where p.deceased_year = extract('YEAR' from op.year_date)) as deceased 
          , (SELECT count(pp.id) 
               FROM {{ ref('dim_patient') }} pp 
              WHERE pp.birthDate < (op.year_date + interval '1 YEAR')

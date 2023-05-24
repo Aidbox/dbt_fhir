@@ -4,3 +4,11 @@ SNOMED CT-INT,http://snomed.info/sct
 ActCode,http://terminology.hl7.org/CodeSystem/v3-ActCode
 language,urn:ietf:bcp:47
 MaritalStatus,http://terminology.hl7.org/CodeSystem/v3-MaritalStatus
+loinc,http://loinc.org
+observation-category,http://terminology.hl7.org/CodeSystem/observation-category
+condition-category,http://terminology.hl7.org/CodeSystem/condition-category
+condition-clinical,http://terminology.hl7.org/CodeSystem/condition-clinical
+allergyintolerance-clinical,http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical
+condition-verstatus,http://terminology.hl7.org/CodeSystem/condition-ver-status
+allergyintolerance-verstatus,http://terminology.hl7.org/CodeSystem/allergyintolerance-verification
+rxnorm,http://www.nlm.nih.gov/research/umls/rxnorm

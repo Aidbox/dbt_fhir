@@ -12,6 +12,8 @@
 - DB tune configuration
 
 
+## OMOP ??
+
 ## Framework
 3 layers
 - RAW fhir date

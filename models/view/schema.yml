@@ -1,5 +1,27 @@
 version: 2
 models:
+  - name: Patient
+    columns: 
+    - name: "id"
+      tests:
+      - fhir_uuid
+  - name: Observation
+    columns: 
+    - name: "resource#>>'{ issued }'"
+      tests:
+      - fhir_date
+    - name: "resource#>>'{ effective,dateTime }'"
+      tests:
+      - fhir_date
+    - name: id
+      tests:
+      - fhir_uuid
+    - name: resource#>>'{ subject,id }'
+      tests:
+      - fhir_uuid
+    - name: resource#>>'{ encounter,id }'
+      tests:
+      - fhir_uuid
   - name: Encounter 
     columns: 
     - name: "resource#>>'{period,start}'"
@@ -8,7 +30,22 @@ models:
     - name: "resource#>>'{period,end}'"
       tests:
       - fhir_date
-          
-          
-          
-          # regex: "([0-9]([0-9]([0-9][1-9]|[1-9]0)|[1-9]00)|[1-9]000)(-(0[1-9]|1[0-2])(-(0[1-9]|[1-2][0-9]|3[0-1])(T([01][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)(\\.[0-9]{1,9})?)?)?(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00)?)?)?"
+  - name: Procedure
+    columns: 
+    - name: "resource#>>'{performed,Period,end}'"
+      tests:
+      - fhir_date
+    - name: "resource#>>'{performed,Period,start}'"
+      tests:
+      - fhir_date
+  - name: Condition
+    columns: 
+    - name: "resource#>>'{onset,dateTime}'"
+      tests:
+      - fhir_date
+    - name: "resource#>>'{abatement,dateTime}'"
+      tests:
+      - fhir_date
+    - name: "resource#>>'{recordedDate}'"
+      tests:
+      - fhir_date
