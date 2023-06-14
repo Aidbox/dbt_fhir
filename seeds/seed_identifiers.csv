@@ -1,5 +1,0 @@
-alias,system
-synthea,https://github.com/synthetichealth/synthea
-npi,http://hl7.org/fhir/sid/us-npi
-ssn,http://hl7.org/fhir/sid/us-ssn
-mrn,http://hospital.smarthealthit.org
