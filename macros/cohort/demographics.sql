@@ -1,6 +1,4 @@
-{# age if deceased ? #}
-
-{%- macro age(resource=None) -%}
+{% macro age(resource=None) -%}
     DATE_PART('year', AGE(date({{ aidbox.if_res(resource) }} #>>'{birthDate}')))
 {%- endmacro %}
 
