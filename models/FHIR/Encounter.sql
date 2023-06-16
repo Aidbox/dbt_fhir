@@ -1,1 +1,1 @@
-select * from encounter
+select * from Encounter

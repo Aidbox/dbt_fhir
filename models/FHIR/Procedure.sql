@@ -1,1 +1,1 @@
-select * from procedure
+select * from Procedure

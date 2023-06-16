@@ -1,1 +1,1 @@
-select * from observation
+select * from Observation

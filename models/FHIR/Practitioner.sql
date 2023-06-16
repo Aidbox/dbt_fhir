@@ -1,1 +1,1 @@
-select * from practitioner
+select * from Practitioner

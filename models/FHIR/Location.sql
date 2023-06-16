@@ -1,1 +1,1 @@
-select * from location
+select * from Location
