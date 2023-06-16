@@ -3,6 +3,12 @@
 dbt package for Aidbox FHIR platform 
 Sample project - git repo
 
+## Features
+- FHIR centric
+- Utils
+- Cohorts
+- FHIR datatypes tests
+
 # Models - FHIR resources
 - list of fhir resource
 
@@ -16,6 +22,9 @@ Sample project - git repo
 - codesystem_display
 - trim
 ## Cohorts
+
+Based on https://build.fhir.org/ig/HL7/vulcan-rwd/patients.html
+
 __Demographics__
 - age
 - gender
@@ -42,3 +51,6 @@ __Visits__
 # Tests
 - fhir_date
 - fhir_uuid
+
+***
+Powered by [Health Samurai](http://www.health-samurai.io) | [Aidbox](http://www.health-samurai.io/aidbox) | [Fhirbase](http://www.health-samurai.io/fhirbase)
