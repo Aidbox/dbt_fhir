@@ -18,7 +18,7 @@ packages:
 - [Tests](#tests) - provide tests for FHIR data types
 
 ## Models - FHIR resources
-This package provides models for all FHIR resources of version 4.0.1
+This package provides models for [all FHIR resources](models/FHIR) of version 4.0.1
 
 Usage example:
 
