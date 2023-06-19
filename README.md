@@ -23,13 +23,13 @@ This package provides models for all FHIR resources of version 4.0.1
 Usage example:
 
 ```sql
-  select   id 
-         , {{ aidbox.age() }} age
-         , {{ aidbox.identifier('ssn') }} ssn
-         , {{ aidbox.identifier('mrn') }} mrn
-         , {{ aidbox.gender() }} gender
-         , {{ aidbox.race() }} race
+  select count(*) 
     from {{ ref('aidbox', 'Patient')}}
+
+-- Expand
+
+  select count(*) 
+    from "db"."dbt_fhir"."Patient"
 ```
 
 ## Macros
