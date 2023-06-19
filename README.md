@@ -33,9 +33,10 @@ Usage example: count of Patients
 ```
 
 ## Macros
-- [path(path, resource=None)](macros/jsonb.sql) - extract resource value by json path, equivalent of `#>>` operator
-  - `path` - comma separated path of the value like `"name, 0, given, 0"`
-  - `resource` - optional resource column
+###  path(path, resource=None) ( [source](macros/jsonb.sql) )
+Extract resource value by json path, equivalent of `#>>` operator
+- `path` - comma separated path of the value like `"name, 0, given, 0"`
+- `resource` - optional resource column
 
 ```sql
 select {{ aidbox.path("name, 0, given, 0") }} as name
@@ -48,7 +49,7 @@ select ("resource"#>>'{ name, 0, given, 0 }') as name
 ```
 
 - [identifier(alias, resource=None)](macros/identifier.sql) - extract identifier value for given identifier system alias
-  - `alias` - identifier alias from `seed_identifiers` seed
+  - `alias` - human readable  identifier alias from `seed_identifiers` seed
   - `resource` - optional resource column
 
 >  Require `seed_identifiers` seed with columns `alias` and `system`
@@ -76,7 +77,7 @@ select ("resource"#>>'{ name, 0, given, 0 }') as name
 
 ```
 - [extension(alias, jpath, resource=None)](macros/extension.sql) - extract extension value for given extension alias
-  - `alias` - identifier alias from `seed_extension` seed
+  - `alias` - human readable identifier alias from `seed_extension` seed
   - `jpath` - path of extension value inside extension  in jsonpath format
   - `resource` - optional resource column
 
@@ -101,10 +102,21 @@ from "db"."dbt_fhir"."Patient"
 ```
 - [codesystem_code(path,  resource=None)](macros/codesystem.sql) - extract codesystem code for given system alias
   - `jpath` - path in jsonpath format
-  - `alias` - alias value from `seed_codesystems` seed
+  - `alias` - human readable alias value from `seed_codesystems` seed
   - `resource` - optional resource column
 
 >  Require `seed_codesystems` seed with columns `alias` and `system`
+>
+>__seed/seed_codesystems.csv__
+>```csv
+>alias,system
+>organization-type,http://terminology.hl7.org/CodeSystem/organization-type
+>SNOMED CT-INT,http://snomed.info/sct
+>ActCode,http://terminology.hl7.org/CodeSystem/v3-ActCode
+>language,urn:ietf:bcp:47
+>MaritalStatus,http://terminology.hl7.org/CodeSystem/v3-MaritalStatus
+>loinc,http://loinc.org
+>```
 
 ```sql
 SELECT id
@@ -119,7 +131,7 @@ SELECT id
 ```
 - [codesystem_display(jpath, alias, resource=None)](macros/codesystem.sql) - extract codesystem display for given system alias
   - `jpath` - path in jsonpath format
-  - `alias` - alias value from `seed_codesystems` seed
+  - `alias` - human readable alias value from `seed_codesystems` seed
   - `resource` - optional resource column
 
 >  Require `seed_codesystems` seed with columns `alias` and `system`
