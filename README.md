@@ -34,6 +34,9 @@ Usage example: count of Patients
 
 ## Macros
 - [path(path, resource=None)](macros/jsonb.sql) - extract resource value by json path, equivalent of `#>>` operator
+  - `path` - comma separated path of the value like `"name, 0, given, 0"`
+  - `resource` - optional resource column
+
 ```sql
 select {{ aidbox.path("name, 0, given, 0") }} as name
   from {{ ref('aidbox', 'Location')}}
@@ -45,17 +48,37 @@ select ("resource"#>>'{ name, 0, given, 0 }') as name
 ```
 
 - [identifier(alias, resource=None)](macros/identifier.sql) - extract identifier value for given identifier system alias
+  - `alias` - identifier alias from `seed_identifiers` seed
+  - `resource` - optional resource column
+
+>  Require `seed_identifiers` seed with columns `alias` and `system`
+>
+>__seed/seed_identifiers.csv__
+>```csv
+>alias,system
+>npi,http://hl7.org/fhir/sid/us-npi
+>ssn,http://hl7.org/fhir/sid/us-ssn
+>mrn,http://hospital.smarthealthit.org
+>```
 
 ```sql
-select 
-  from {{ ref('aidbox', 'Patient')}}
+  SELECT id
+         , {{ aidbox.identifier('synthea') }} synthea_id
+         , {{ aidbox.identifier('ssn') }} ssn
+         , {{ aidbox.identifier('mrn') }} mrn
+    FROM {{ ref('aidbox', 'Patient') }}
 
 -- Expand 
 
-select 
-  from "db"."dbt_fhir"."Patient"
+  SELECT   id
+         , (trim('"' FROM (jsonb_path_query_first("resource", concat('$.identifier ?(@.system=="', (SELECT system FROM "cdrdemo"."dbt"."seed_identifiers" WHERE alias = 'synthea' limit 1), '").value')::jsonpath))::text)) synthea_id
+         , (trim('"' FROM (jsonb_path_query_first("resource", concat('$.identifier ?(@.system=="', (SELECT system FROM "cdrdemo"."dbt"."seed_identifiers" WHERE alias = 'ssn' limit 1), '").value')::jsonpath))::text)) ssn
+         , (trim('"' FROM (jsonb_path_query_first("resource", concat('$.identifier ?(@.system=="', (SELECT system FROM "cdrdemo"."dbt"."seed_identifiers" WHERE alias = 'mrn' limit 1), '").value')::jsonpath))::text)) mrn
+    FROM "cdrdemo"."dbt_fhir"."Patient" 
+
 ```
 - [extension(alias, jpath, resource=None)](macros/extension.sql) - extract extension value for given extension alias
+  - `resource` - optional resource column
 
 ```sql
 select 
