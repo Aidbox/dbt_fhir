@@ -63,7 +63,6 @@ select ("resource"#>>'{ name, 0, given, 0 }') as name
 
 ```sql
   SELECT id
-         , {{ aidbox.identifier('synthea') }} synthea_id
          , {{ aidbox.identifier('ssn') }} ssn
          , {{ aidbox.identifier('mrn') }} mrn
     FROM {{ ref('aidbox', 'Patient') }}
@@ -71,23 +70,34 @@ select ("resource"#>>'{ name, 0, given, 0 }') as name
 -- Expand 
 
   SELECT   id
-         , (trim('"' FROM (jsonb_path_query_first("resource", concat('$.identifier ?(@.system=="', (SELECT system FROM "cdrdemo"."dbt"."seed_identifiers" WHERE alias = 'synthea' limit 1), '").value')::jsonpath))::text)) synthea_id
-         , (trim('"' FROM (jsonb_path_query_first("resource", concat('$.identifier ?(@.system=="', (SELECT system FROM "cdrdemo"."dbt"."seed_identifiers" WHERE alias = 'ssn' limit 1), '").value')::jsonpath))::text)) ssn
-         , (trim('"' FROM (jsonb_path_query_first("resource", concat('$.identifier ?(@.system=="', (SELECT system FROM "cdrdemo"."dbt"."seed_identifiers" WHERE alias = 'mrn' limit 1), '").value')::jsonpath))::text)) mrn
-    FROM "cdrdemo"."dbt_fhir"."Patient" 
+         , (trim('"' FROM (jsonb_path_query_first("resource", concat('$.identifier ?(@.system=="', (SELECT system FROM "db"."dbt"."seed_identifiers" WHERE alias = 'ssn' limit 1), '").value')::jsonpath))::text)) ssn
+         , (trim('"' FROM (jsonb_path_query_first("resource", concat('$.identifier ?(@.system=="', (SELECT system FROM "db"."dbt"."seed_identifiers" WHERE alias = 'mrn' limit 1), '").value')::jsonpath))::text)) mrn
+    FROM "db"."dbt_fhir"."Patient" 
 
 ```
 - [extension(alias, jpath, resource=None)](macros/extension.sql) - extract extension value for given extension alias
+  - `alias` - identifier alias from `seed_extension` seed
+  - `jpath` - path of extension value inside extension  in jsonpath format
   - `resource` - optional resource column
 
+>  Require `seed_extension` seed with columns `alias` and `url`
+>
+>__seed/seed_extension.csv__
+>```csv
+>alias,url
+>us-race,http://hl7.org/fhir/us/core/StructureDefinition/us-core-race
+>us-ethnicity,http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity
+>us-birthsex,http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex
+>```
+
 ```sql
-select 
+select  {{ aidbox.extension('us-race', 'extension.valueString') }}
   from {{ ref('aidbox', 'Patient')}}
 
 -- Expand 
 
-select 
-  from "db"."dbt_fhir"."Patient"
+select  (trim('"' FROM (jsonb_path_query_first("resource", concat('$.extension ? (@.url == "', (SELECT url FROM "db"."dbt"."seed_extension" WHERE alias = 'us-race' limit 1), '").extension.valueString')::jsonpath))::TEXT))
+from "db"."dbt_fhir"."Patient"
 ```
 - [codesystem_code(path,  resource=None)](macros/codesystem.sql) - extract codesystem code for given system alias
   - `jpath` - path in jsonpath format
@@ -150,19 +160,19 @@ __Demographics__
 - ethnicity
 
 __Diagnosis__
-- todo
+- Work in progress...
 
 __LabTests__
-- todo
+- Work in progress...
 
 __Medications__
-- todo
+- Work in progress...
 
 __Procedures__
-- todo
+- Work in progress...
 
 __Visits__
-- todo
+- Work in progress...
 
 ## Tests
 - fhir_date
