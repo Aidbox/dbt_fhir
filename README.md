@@ -48,9 +48,10 @@ select ("resource"#>>'{ name, 0, given, 0 }') as name
   from "db"."dbt_fhir"."Location"
 ```
 
-- [identifier(alias, resource=None)](macros/identifier.sql) - extract identifier value for given identifier system alias
-  - `alias` - human readable  identifier alias from `seed_identifiers` seed
-  - `resource` - optional resource column
+###  identifier(alias, resource=None) ([source](macros/identifier.sql))
+Extract identifier value for given identifier system alias
+- `alias` - human readable  identifier alias from `seed_identifiers` seed
+- `resource` - optional resource column
 
 >  Require `seed_identifiers` seed with columns `alias` and `system`
 >
@@ -76,10 +77,11 @@ select ("resource"#>>'{ name, 0, given, 0 }') as name
     FROM "db"."dbt_fhir"."Patient" 
 
 ```
-- [extension(alias, jpath, resource=None)](macros/extension.sql) - extract extension value for given extension alias
-  - `alias` - human readable identifier alias from `seed_extension` seed
-  - `jpath` - path of extension value inside extension  in jsonpath format
-  - `resource` - optional resource column
+### extension(alias, jpath, resource=None) ([source](macros/extension.sql))
+Extract extension value for given extension alias
+- `alias` - human readable identifier alias from `seed_extension` seed
+- `jpath` - path of extension value inside extension  in jsonpath format
+- `resource` - optional resource column
 
 >  Require `seed_extension` seed with columns `alias` and `url`
 >
@@ -100,10 +102,11 @@ select  {{ aidbox.extension('us-race', 'extension.valueString') }}
 select  (trim('"' FROM (jsonb_path_query_first("resource", concat('$.extension ? (@.url == "', (SELECT url FROM "db"."dbt"."seed_extension" WHERE alias = 'us-race' limit 1), '").extension.valueString')::jsonpath))::TEXT))
 from "db"."dbt_fhir"."Patient"
 ```
-- [codesystem_code(path,  resource=None)](macros/codesystem.sql) - extract codesystem code for given system alias
-  - `jpath` - path in jsonpath format
-  - `alias` - human readable alias value from `seed_codesystems` seed
-  - `resource` - optional resource column
+###  codesystem_code(path,  resource=None) ([source](macros/codesystem.sql))
+Extract codesystem code for given system alias
+- `jpath` - path in jsonpath format
+- `alias` - human readable alias value from `seed_codesystems` seed
+- `resource` - optional resource column
 
 >  Require `seed_codesystems` seed with columns `alias` and `system`
 >
@@ -129,10 +132,11 @@ SELECT id
        , (trim('"' FROM (jsonb_path_query_first("resource", concat('$.type.coding ?(@.system=="', (SELECT system FROM "db"."dbt"."seed_codesystems" WHERE alias = 'organization-type' limit 1), '").code')::jsonpath))::text)) type_code
   FROM "db"."dbt_fhir"."Organization"
 ```
-- [codesystem_display(jpath, alias, resource=None)](macros/codesystem.sql) - extract codesystem display for given system alias
-  - `jpath` - path in jsonpath format
-  - `alias` - human readable alias value from `seed_codesystems` seed
-  - `resource` - optional resource column
+### codesystem_display(jpath, alias, resource=None) ([source](macros/codesystem.sql))
+Extract codesystem display for given system alias
+- `jpath` - path in jsonpath format
+- `alias` - human readable alias value from `seed_codesystems` seed
+- `resource` - optional resource column
 
 >  Require `seed_codesystems` seed with columns `alias` and `system`
 
@@ -147,8 +151,9 @@ SELECT id
        , (trim('"' FROM (jsonb_path_query_first("resource", concat('$.type.coding ?(@.system=="', (SELECT system FROM "db"."dbt"."seed_codesystems" WHERE alias = 'organization-type' limit 1), '").display')::jsonpath))::text)) type_display
   FROM "db"."dbt_fhir"."Organization"
 ```
-- [trim(expr)](macros/text.sql) - remove surrounded `"` of string
-  - `expr` - sql expression
+### trim(expr) ([source](macros/text.sql)) 
+Remove surrounded `".."` of string
+- `expr` - sql expression
 
 ```sql
 select {{ aidbox.trim('s') }} 
