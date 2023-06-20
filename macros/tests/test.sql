@@ -55,3 +55,27 @@
 {%- macro test_fhir_uuid(column_name, model) -%}
   {{ aidbox.test_fhir_re(column_name, model, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}')}}
 {%- endmacro -%}
+
+{%- macro test_fhir_boolean(column_name, model) -%}
+  {{ aidbox.test_fhir_re(column_name, model, 'true|false')}}
+{%- endmacro -%}
+
+{%- macro test_fhir_decimal(column_name, model) -%}
+  {{ aidbox.test_fhir_re(column_name, model, '-?(0|[1-9][0-9]{0,17})(\.[0-9]{1,17})?([eE][+-]?[0-9]{1,9}})?')}}
+{%- endmacro -%}
+
+{%- macro test_fhir_positiveInt(column_name, model) -%}
+  {{ aidbox.test_fhir_re(column_name, model, '[1-9][0-9]*')}}
+{%- endmacro -%}
+
+{%- macro test_fhir_unsignedInt(column_name, model) -%}
+  {{ aidbox.test_fhir_re(column_name, model, '[0]|([1-9][0-9]*)')}}
+{%- endmacro -%}
+
+{%- macro test_fhir_integer(column_name, model) -%}
+  {{ aidbox.test_fhir_re(column_name, model, '[0]|[-+]?[1-9][0-9]*')}}
+{%- endmacro -%}
+
+{%- macro test_fhir_integer64(column_name, model) -%}
+  {{ aidbox.test_fhir_re(column_name, model, '[0]|[-+]?[1-9][0-9]*')}}
+{%- endmacro -%}

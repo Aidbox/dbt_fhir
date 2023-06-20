@@ -235,12 +235,12 @@ __Example:__
 - [fhir_url](macros/tests/test.sql) - ([doc](https://build.fhir.org/datatypes.html#url))
 - [fhir_uuid](macros/tests/test.sql) - ([doc](https://build.fhir.org/datatypes.html#uuid))
 - [fhir_markdown](macros/tests/test.sql) - ([doc](https://build.fhir.org/datatypes.html#markdown))
-- [fhir_boolean](macros/tests/test.sql) - WIP
-- [fhir_decimal](macros/tests/test.sql) - WIP
-- [fhir_positiveInt](macros/tests/test.sql) - WIP
-- [fhir_unsignedInt](macros/tests/test.sql) - WIP
-- [fhir_integer](macros/tests/test.sql) - WIP
-- [fhir_integer64](macros/tests/test.sql) - WIP
+- [fhir_boolean](macros/tests/test.sql) - ([doc](https://build.fhir.org/datatypes.html#boolean))
+- [fhir_decimal](macros/tests/test.sql) - ([doc](https://build.fhir.org/datatypes.html#decimal))
+- [fhir_positiveInt](macros/tests/test.sql) - ([doc](https://build.fhir.org/datatypes.html#positiveInt))
+- [fhir_unsignedInt](macros/tests/test.sql) - ([doc](https://build.fhir.org/datatypes.html#unsignedInt))
+- [fhir_integer](macros/tests/test.sql) - ([doc](https://build.fhir.org/datatypes.html#integer))
+- [fhir_integer64](macros/tests/test.sql) - ([doc](https://build.fhir.org/datatypes.html#integer64))
 
 
 __Example:__
