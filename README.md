@@ -132,7 +132,7 @@ SELECT id
        , (trim('"' FROM (jsonb_path_query_first("resource", concat('$.type.coding ?(@.system=="', (SELECT system FROM "db"."dbt"."seed_codesystems" WHERE alias = 'organization-type' limit 1), '").code')::jsonpath))::text)) type_code
   FROM "db"."dbt_fhir"."Organization"
 ```
-### codesystem_display(jpath, alias, resource=None) ([source](macros/codesystem.sql))
+### [codesystem_display(jpath, alias, resource=None)](macros/codesystem.sql)
 Extract codesystem display for given system alias
 - `jpath` - path in jsonpath format
 - `alias` - human readable alias value from `seed_codesystems` seed
@@ -152,7 +152,7 @@ SELECT id
   FROM "db"."dbt_fhir"."Organization"
 ```
 
-### trim(expr) ([source](macros/text.sql)) 
+### [trim(expr)](macros/text.sql)
 Remove surrounded `".."` of string
 - `expr` - sql expression
 
