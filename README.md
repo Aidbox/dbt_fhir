@@ -1,4 +1,4 @@
-# Aidbox FHIR DBT Package
+# Aidbox FHIR DBT package
 
 This dbt package provides useful macros, build in models, and tests for work with [Aidbox FHIR platform](https://aidbox.app).
 
@@ -33,7 +33,7 @@ Usage example: count of Patients
 ```
 
 ## Macros
-###  path(path, resource=None) ( [source](macros/jsonb.sql) )
+###  [path(path, resource=None)](macros/jsonb.sql) 
 Extract resource value by json path, equivalent of `#>>` operator
 - `path` - comma separated path of the value like `"name, 0, given, 0"`
 - `resource` - optional resource column
@@ -48,7 +48,7 @@ select ("resource"#>>'{ name, 0, given, 0 }') as name
   from "db"."dbt_fhir"."Location"
 ```
 
-###  identifier(alias, resource=None) ([source](macros/identifier.sql))
+###  [identifier(alias, resource=None)](macros/identifier.sql)
 Extract identifier value for given identifier system alias
 - `alias` - human readable  identifier alias from `seed_identifiers` seed
 - `resource` - optional resource column
@@ -77,7 +77,7 @@ Extract identifier value for given identifier system alias
     FROM "db"."dbt_fhir"."Patient" 
 
 ```
-### extension(alias, jpath, resource=None) ([source](macros/extension.sql))
+### [extension(alias, jpath, resource=None)](macros/extension.sql)
 Extract extension value for given extension alias
 - `alias` - human readable identifier alias from `seed_extension` seed
 - `jpath` - path of extension value inside extension  in jsonpath format
@@ -102,7 +102,7 @@ select  {{ aidbox.extension('us-race', 'extension.valueString') }}
 select  (trim('"' FROM (jsonb_path_query_first("resource", concat('$.extension ? (@.url == "', (SELECT url FROM "db"."dbt"."seed_extension" WHERE alias = 'us-race' limit 1), '").extension.valueString')::jsonpath))::TEXT))
 from "db"."dbt_fhir"."Patient"
 ```
-###  codesystem_code(path,  resource=None) ([source](macros/codesystem.sql))
+###  [codesystem_code(path,  resource=None)](macros/codesystem.sql)
 Extract codesystem code for given system alias
 - `jpath` - path in jsonpath format
 - `alias` - human readable alias value from `seed_codesystems` seed
