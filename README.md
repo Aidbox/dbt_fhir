@@ -1,14 +1,14 @@
 # Aidbox FHIR DBT package
 
-This dbt package provides useful macros, build in models, and tests for work with [Aidbox FHIR platform](https://aidbox.app).
+This dbt package provides useful macros, build in models, and tests for work with [Aidbox FHIR platform](https://aidbox.app). Only PostgreSQL datasource supported.
 
 See [Sample project](https://github.com/Aidbox/dbt-sample-project) for deep dive into analytics on FHIR.
 
 ## Installation
 ```yml
 packages:
-  - git: "https://github.com/Aidbox/dbt.git"
-    revision: 0.1.0
+  - git: "Aidbox/dbt_fhir"
+    version: 0.1.0
 ```
 
 ## Features
