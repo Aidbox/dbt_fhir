@@ -247,7 +247,7 @@ __Example:__
 ```yml
 version: 2
 models:
-  - name: Patient
+  - name: Location
     columns: 
     - name: "id"
       tests:
@@ -261,6 +261,16 @@ models:
       tests:
       - aidbox.fhir_date
 ```
+
+__Run tests__
+```bash
+# Run all tests
+dbt test --store-failures
+
+# Test specific model
+dbt test --store-failures --select Location
+```
+
 
 ***
 Powered by [Health Samurai](http://www.health-samurai.io) | [Aidbox](http://www.health-samurai.io/aidbox) | [Fhirbase](http://www.health-samurai.io/fhirbase)
