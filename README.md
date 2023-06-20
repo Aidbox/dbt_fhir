@@ -177,6 +177,10 @@ Based on [Vulcan RWD](https://build.fhir.org/ig/HL7/vulcan-rwd/patients.html)
 - [race(resource=None)](macros/cohort/demographics.sql) - Get Patient US core IG race
 - [ethnicity(resource=None)](macros/cohort/demographics.sql) - Get Patient US core IG ethnicity
 
+> `resource` column is optional. If not passed, used `resource` column
+>
+> You can directly specify resource column, for example, in JOIN statements
+
 __Example:__
 ```sql
   SELECT   id
