@@ -220,8 +220,28 @@ __Example:__
 - Work in progress...
 
 ## Tests
+
+- [fhir_base64Binary](macros/tests/test.sql) - WIP
+- [fhir_boolean](macros/tests/test.sql) - WIP
+- [fhir_canonical](macros/tests/test.sql) - WIP
+- [fhir_code](macros/tests/test.sql) - WIP
 - [fhir_date](macros/tests/test.sql) - validate [FHIR date](https://build.fhir.org/datatypes.html#date)
+- [fhir_dateTime](macros/tests/test.sql) - WIP
+- [fhir_decimal](macros/tests/test.sql) - WIP
+- [fhir_id ](macros/tests/test.sql) - WIP
+- [fhir_instant](macros/tests/test.sql) - WIP
+- [fhir_integer](macros/tests/test.sql) - WIP
+- [fhir_integer64](macros/tests/test.sql) - WIP
+- [fhir_markdown](macros/tests/test.sql) - WIP
+- [fhir_oid](macros/tests/test.sql) - WIP
+- [fhir_string](macros/tests/test.sql) - WIP
+- [fhir_positiveInt](macros/tests/test.sql) - WIP
+- [fhir_time](macros/tests/test.sql) - WIP
+- [fhir_unsignedInt](macros/tests/test.sql) - WIP
+- [fhir_uri](macros/tests/test.sql) - WIP
+- [fhir_url](macros/tests/test.sql) - WIP
 - [fhir_uuid](macros/tests/test.sql) - validate [FHIR uuid](https://build.fhir.org/datatypes.html#uuid)
+
 
 __Example__
 ```yml
