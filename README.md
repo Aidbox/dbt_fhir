@@ -7,7 +7,7 @@ See [Sample project](https://github.com/Aidbox/dbt-sample-project) for deep dive
 ## Installation
 ```yml
 packages:
-  - git: "Aidbox/dbt_fhir"
+  - package: "Aidbox/dbt_fhir"
     version: 0.1.0
 ```
 
