@@ -8,7 +8,7 @@ See [Sample project](https://github.com/Aidbox/dbt-sample-project) for deep dive
 ```yml
 packages:
   - git: "https://github.com/Aidbox/dbt.git"
-    warn-unpinned: false
+    revision: 0.1.0
 ```
 
 ## Features
