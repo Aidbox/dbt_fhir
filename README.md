@@ -151,6 +151,7 @@ SELECT id
        , (trim('"' FROM (jsonb_path_query_first("resource", concat('$.type.coding ?(@.system=="', (SELECT system FROM "db"."dbt"."seed_codesystems" WHERE alias = 'organization-type' limit 1), '").display')::jsonpath))::text)) type_display
   FROM "db"."dbt_fhir"."Organization"
 ```
+
 ### trim(expr) ([source](macros/text.sql)) 
 Remove surrounded `".."` of string
 - `expr` - sql expression
@@ -168,33 +169,74 @@ select trim('"' FROM ( s ) ::TEXT)
 
 Based on [Vulcan RWD](https://build.fhir.org/ig/HL7/vulcan-rwd/patients.html)
 
-__Demographics__
-- age
-- gender
-- alive
-- death
-- race
-- ethnicity
+### Demographics
+- [age(resource=None)](macros/cohort/demographics.sql) - Get Patient age
+- [gender(resource=None)](macros/cohort/demographics.sql) - Get Patient Gender
+- [alive(resource=None)](macros/cohort/demographics.sql) - Get Patient alive status
+- [death(resource=None)](macros/cohort/demographics.sql) - Get Patient death status
+- [race(resource=None)](macros/cohort/demographics.sql) - Get Patient US core IG race
+- [ethnicity(resource=None)](macros/cohort/demographics.sql) - Get Patient US core IG ethnicity
 
-__Diagnosis__
+__Example:__
+```sql
+  SELECT   id
+         , {{ aidbox.age() }} age
+         , {{ aidbox.identifier('ssn') }} ssn
+         , {{ aidbox.identifier('mrn') }} mrn
+         , {{ aidbox.gender() }} gender
+         , {{ aidbox.alive() }} alive
+         , {{ aidbox.race() }} race
+         , {{ aidbox.ethnicity() }} ethnicity
+         , {{ aidbox.extension('us-birthsex', 'valueCode') }} birthsex
+         , {{ aidbox.path('birthDate') }}::date birthdate
+         , extract('YEAR' from {{ aidbox.path('birthDate') }}::date) birth_year
+         , {{ aidbox.path('deceased,dateTime') }}::date deceased 
+         , extract('YEAR' from {{ aidbox.path('deceased,dateTime') }}::date) deceased_year
+         , {{ aidbox.path('address,0,state') }} state 
+         , {{ aidbox.codesystem_code('maritalStatus', 'MaritalStatus') }} ms_code
+         , {{ aidbox.codesystem_display('maritalStatus', 'MaritalStatus') }} ms_display
+         , {{ aidbox.codesystem_code('communication.language', 'language') }} language_code
+         , {{ aidbox.codesystem_display('communication.language', 'language') }} language_display
+    FROM {{ ref('aidbox', 'Patient') }}
+```
+
+### Diagnosis
 - Work in progress...
 
-__LabTests__
+### LabTests
 - Work in progress...
 
-__Medications__
+### Medications
 - Work in progress...
 
-__Procedures__
+### Procedures
 - Work in progress...
 
-__Visits__
+### Visits
 - Work in progress...
 
 ## Tests
-- fhir_date
-- fhir_uuid
+- [fhir_date](macros/tests/test.sql) - validate [FHIR date](https://build.fhir.org/datatypes.html#date)
+- [fhir_uuid](macros/tests/test.sql) - validate [FHIR uuid](https://build.fhir.org/datatypes.html#uuid)
 
+__Example__
+```yml
+version: 2
+models:
+  - name: Patient
+    columns: 
+    - name: "id"
+      tests:
+      - aidbox.fhir_uuid
+  - name: Observation
+    columns: 
+    - name: "resource#>>'{ issued }'"
+      tests:
+      - aidbox.fhir_date
+    - name: "resource#>>'{ effective,dateTime }'"
+      tests:
+      - aidbox.fhir_date
+```
 
 ***
 Powered by [Health Samurai](http://www.health-samurai.io) | [Aidbox](http://www.health-samurai.io/aidbox) | [Fhirbase](http://www.health-samurai.io/fhirbase)
